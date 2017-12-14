@@ -5,21 +5,22 @@ import tor_blutmagie
 
 class TorBlutmagieAnalyzer(Analyzer):
     """Cortex analyzer to query TorBlutmagie for exit nodes IP addresses and/or names"""
+
     def __init__(self):
         Analyzer.__init__(self)
-        self.cache_duration = self.getParam('config.cache.duration', 3600)
-        self.cache_root = self.getParam(
+        self.cache_size = self.get_param('config.cache.size', 2048)
+        self.cache_root = self.get_param(
             'config.cache.root', '/tmp/cortex/tor_project'
         )
 
         self.client = tor_blutmagie.TorBlutmagieClient(
-            cache_duration=self.cache_duration,
+            cache_size=self.cache_size,
             cache_root=self.cache_root
         )
 
     def summary(self, raw):
         taxonomies = []
-        if ('nodes' in raw):
+        if 'nodes' in raw:
             r = len(raw['nodes'])
             if r == 0 or r == 1:
                 value = "{} node".format(r)
@@ -30,8 +31,8 @@ class TorBlutmagieAnalyzer(Analyzer):
                 level = 'suspicious'
             else:
                 level = 'info'
-        taxonomies.append(
-            self.build_taxonomy(level, 'TorBlutmagie', 'Node', value))
+            taxonomies.append(
+                self.build_taxonomy(level, 'TorBlutmagie', 'Node', value))
         return {"taxonomies": taxonomies}
 
     def run(self):
