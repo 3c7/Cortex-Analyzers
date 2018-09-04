@@ -1,0 +1,13 @@
+{
+  "name": "Reporter",
+  "version": "1.0",
+  "author": "Nils Kuhnert",
+  "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
+  "license": "AGPL-V3",
+  "description": "Create a simple report from a case.",
+  "dataTypeList": ["thehive:case"],
+  "command": "Reporter/reporter.py",
+  "baseConfig": "Reporter",
+  "configurationItems": [
+  ]
+}
