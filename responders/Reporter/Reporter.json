@@ -4,10 +4,19 @@
   "author": "Nils Kuhnert",
   "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
   "license": "AGPL-V3",
-  "description": "Create a simple report from a case.",
-  "dataTypeList": ["thehive:case"],
+  "description": "Create a simple report from a case using a doc(x) template.",
+  "dataTypeList": [
+    "thehive:case"
+  ],
   "command": "Reporter/reporter.py",
   "baseConfig": "Reporter",
   "configurationItems": [
+    {
+      "name": "template_path",
+      "description": "Path to the doc(x) template.",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
   ]
 }
